@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Your Results — French Political Pulse</title>
+  <link rel="stylesheet" href="/static/style.css"/>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="flag">🇫🇷</div>
+    <h1>Your Political Profile</h1>
+    <p><a href="/" class="back-link">← Take the poll again</a></p>
+  </header>
+
+  {% if personal %}
+
+  {# ── Authenticity score ─────────────────────────────────────────────── #}
+  {% set cred = personal.credibility %}
+  <div class="cred-card {% if personal.is_troll %}cred-troll{% elif personal.is_suspicious %}cred-warn{% else %}cred-ok{% endif %}">
+    <div class="cred-header">
+      {% if personal.is_troll %}
+        ⚠ Consistency Alert
+      {% elif personal.is_suspicious %}
+        ⚡ Some Inconsistencies Detected
+      {% else %}
+        ✓ Consistent Profile
+      {% endif %}
+    </div>
+    <div class="cred-score">{{ cred }}<span>/100</span></div>
+    <div class="cred-bar-track">
+      <div class="cred-bar-fill" style="width:{{ cred }}%; background: {% if cred >= 65 %}#4caf50{% elif cred >= 40 %}#ff9800{% else %}#f44336{% endif %}"></div>
+    </div>
+    <p class="cred-label">
+      {% if personal.is_troll %}
+        Your answers contain significant internal contradictions — see below.
+      {% elif personal.is_suspicious %}
+        A few tensions exist in your positions — review the notes below.
+      {% else %}
+        Your positions are internally coherent across all four dimensions.
+      {% endif %}
+    </p>
+
+    {% if personal.contradictions %}
+    <div class="contradiction-list">
+      {% for c in personal.contradictions %}
+      <div class="contradiction-item {% if c.severity == 'major' %}major{% else %}moderate{% endif %}">
+        <span class="c-tag">{{ c.severity|upper }}</span>
+        {{ c.explanation }}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if personal.party_calibration and personal.party_calibration.mismatches %}
+    <div class="party-mismatch">
+      <strong>Political alignment mismatch:</strong> Your declared party
+      (<em>{{ personal.party_calibration.party }}</em>) doesn't match your answers on:
+      {% for m in personal.party_calibration.mismatches %}
+        <span class="dim-tag">{{ m.dimension }} (you: {{ m.actual }}, expected {{ m.expected }})</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  {# ── Political profile ──────────────────────────────────────────────── #}
+  <div class="profile-card" style="border-color: {{ personal.profile_color }}">
+    <div class="profile-label" style="color: {{ personal.profile_color }}">
+      Your profile: <strong>{{ personal.profile_name }}</strong>
+    </div>
+    <p class="profile-desc">{{ personal.profile_description }}</p>
+  </div>
+
+  {# ── Dimension axes ─────────────────────────────────────────────────── #}
+  <div class="axes-card">
+    <h2>Your position on 4 axes</h2>
+    {% set dims = [
+      ("eco",     "🌍", "Environment", "Pro-growth", "Radical ecologist"),
+      ("econ",    "⚖️", "Economy & Social", "Trickle-down", "Anti-capitalist"),
+      ("ukraine", "🇺🇦", "Ukraine", "Pro-Russian", "Full military support"),
+      ("police",  "⚡", "Police", "Law-and-order", "Systemic reform / disarm"),
+    ] %}
+    {% for dim, icon, title, left_label, right_label in dims %}
+    {% set score = personal.dim_scores[dim] %}
+    {% set pct = ((score - 1) / 3 * 100)|round|int %}
+    <div class="axis-row">
+      <div class="axis-title">{{ icon }} {{ title }}</div>
+      <div class="axis-ends">
+        <span class="axis-left">{{ left_label }}</span>
+        <span class="axis-right">{{ right_label }}</span>
+      </div>
+      <div class="axis-track">
+        <div class="axis-marker" style="left: calc({{ pct }}% - 10px)"></div>
+      </div>
+      <div class="axis-label-center">{{ personal.dimension_labels[dim] }}</div>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% endif %}{# end personal #}
+
+  {# ── Deputy vote records ────────────────────────────────────────────── #}
+  {% if candidate_votes and candidate_votes.candidates %}
+  {% set deputies_display = [
+    ("autain",       "C. Autain"),
+    ("ruffin",       "F. Ruffin"),
+    ("roussel",      "F. Roussel"),
+    ("faure_vallaud","O. Faure"),
+    ("batho",        "D. Batho"),
+    ("s_rousseau",   "S. Rousseau"),
+    ("wauquiez",     "L. Wauquiez"),
+    ("le_pen",       "M. Le Pen"),
+  ] %}
+  {% set vote_topics = [
+    ("ukraine_support",  "🇺🇦", "Ukraine support",           "Voted FOR military/security agreements with Ukraine"),
+    ("intersectionality","⚤",  "IVG constitutionalization", "Voted FOR constitutional right to abortion"),
+    ("state_role",       "⚖️", "Pension reform censure",    "Voted FOR motion de censure against pension reform"),
+    ("systemic_racism",  "📋", "Immigration law",           "Voted AGAINST the 2023 immigration bill"),
+    ("eco_economy",      "⚡", "Nuclear energy law",        "Voted AGAINST the 2023 nuclear acceleration bill"),
+  ] %}
+  <div class="deputy-votes-section">
+    <h2>How AN deputies voted</h2>
+    <p class="deputy-votes-intro">Roll-call votes from the 16th legislature (2022–2024). Only deputies elected in that term are shown. <strong>Pro</strong> = aligned with the progressive end of each axis.</p>
+
+    {% for topic_id, icon, label, pro_means in vote_topics %}
+    {% if candidate_votes.scrutins_used.get(topic_id) %}
+    <div class="vote-topic-card">
+      <div class="vote-topic-header">{{ icon }} {{ label }}</div>
+      <div class="vote-topic-note">{{ pro_means }}</div>
+      <div class="vote-badges">
+        {% for dep_key, dep_name in deputies_display %}
+          {% set dep = candidate_votes.candidates.get(dep_key) %}
+          {% if dep and dep.get("is_deputy") %}
+            {% set topic_data = dep.get("votes", {}).get(topic_id) %}
+            {% if topic_data %}
+              {% set summary = topic_data.summary %}
+              <span class="vote-badge vote-badge-{{ summary }}">
+                <span class="vote-badge-name">{{ dep_name }}</span>
+                <span class="vote-badge-val">{{ summary|upper }}</span>
+              </span>
+            {% else %}
+              <span class="vote-badge vote-badge-na">
+                <span class="vote-badge-name">{{ dep_name }}</span>
+                <span class="vote-badge-val">2024</span>
+              </span>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+      {% if candidate_votes.scrutins_used.get(topic_id) %}
+      <details class="vote-scrutins-detail">
+        <summary>Scrutins used</summary>
+        <ul class="vote-scrutins-list">
+          {% for s in candidate_votes.scrutins_used[topic_id] %}
+          <li>Scrutin {{ s.id }} (leg. {{ s.leg }}) — {{ s.label }}</li>
+          {% endfor %}
+        </ul>
+      </details>
+      {% endif %}
+    </div>
+    {% endif %}
+    {% endfor %}
+
+    {% if candidate_votes.built_at %}
+    <p class="deputy-votes-built">Data built: {{ candidate_votes.built_at[:10] }}</p>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  {# ── Aggregate results ──────────────────────────────────────────────── #}
+  <div class="agg-section">
+    <h2>Aggregate results — {{ stats.total }} voter{{ "s" if stats.total != 1 else "" }}</h2>
+
+    {% if stats.avg_credibility is not none %}
+    <p class="agg-meta">Average consistency score across all voters: <strong>{{ stats.avg_credibility }}/100</strong></p>
+    {% endif %}
+
+    {# Dimension averages #}
+    <div class="dim-summary">
+      {% for dim, icon, title, left_label, right_label in [
+        ("eco",     "🌍", "Environment",     "Pro-growth (1)",  "Radical ecologist (4)"),
+        ("econ",    "⚖️", "Economy & Social", "Trickle-down (1)","Anti-capitalist (4)"),
+        ("ukraine", "🇺🇦", "Ukraine",          "Pro-Russian (1)", "Full support (4)"),
+        ("police",  "⚡", "Police",           "Law-and-order (1)","Systemic reform (4)"),
+      ] %}
+      <div class="dim-avg-item">
+        <div class="dim-avg-label">{{ icon }} {{ title }}</div>
+        <div class="dim-avg-score" style="color: var(--accent)">{{ stats.dim_avgs[dim] }}</div>
+        <div class="dim-avg-range">{{ left_label }} → {{ right_label }}</div>
+      </div>
+      {% endfor %}
+    </div>
+
+    {# Per-question breakdowns #}
+    {% set ns = namespace(current_section=None) %}
+    {% for q in questions %}
+      {% if q.section != ns.current_section %}
+        {% if ns.current_section != None %}</div>{% endif %}
+        {% set ns.current_section = q.section %}
+        <div class="section-block">
+        <div class="section-header">
+          <span>{{ q.icon }}</span>
+          <span>{{ q.section_label }}</span>
+        </div>
+      {% endif %}
+
+      <div class="question-card result-mode">
+        <div class="question-meta">Q{{ q.number }} — {{ q.text[:90] }}{% if q.text|length > 90 %}…{% endif %}</div>
+
+        {% set q_data = stats.q_pcts.get(q.id, {}) %}
+        {% if q_data %}
+          {% set max_count = q_data.values()|map(attribute='count')|max %}
+          <div class="results-block">
+            {% for opt in q.options %}
+              {% set d = q_data.get(opt.value, {"count": 0, "pct": 0}) %}
+              {% set is_top = d.count == max_count and d.count > 0 %}
+              <div class="result-row">
+                <div class="result-meta">
+                  <span class="result-label {% if is_top %}top{% endif %}">{{ opt.label }}</span>
+                  <span class="result-pct {% if is_top %}top{% endif %}">{{ d.pct }}%</span>
+                </div>
+                <div class="bar-track">
+                  <div class="bar-fill {% if is_top %}top{% endif %}" style="width:{{ d.pct }}%"></div>
+                </div>
+                <span class="result-count">{{ d.count }} vote{{ "s" if d.count != 1 else "" }}</span>
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <p class="no-data">No votes yet for this question.</p>
+        {% endif %}
+
+        {% if q.references %}
+        <details class="ref-block">
+          <summary>Official references</summary>
+          <ul class="ref-list">
+            {% for ref in q.references %}
+            <li><a href="{{ ref.url }}" target="_blank" rel="noopener">{{ ref.label }}</a></li>
+            {% endfor %}
+          </ul>
+        </details>
+        {% endif %}
+      </div>
+
+    {% endfor %}
+    </div>{# close last section #}
+
+  </div>
+
+  <div class="reset-section">
+    <form method="POST" action="/reset" onsubmit="return confirm('Reset ALL votes and start fresh?')">
+      <button type="submit" class="btn-reset">Reset all data</button>
+    </form>
+  </div>
+
+</div>
+</body>
+</html>

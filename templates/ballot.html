@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>French Political Pulse — 10 Questions</title>
+  <link rel="stylesheet" href="/static/style.css"/>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="flag">🇫🇷</div>
+    <h1>French Political Pulse</h1>
+    <p>10 questions on the defining fault lines of French politics today.</p>
+    <p class="sub">Your answers are cross-checked for internal consistency. An authenticity score will be shown with your results.</p>
+    {% if stats %}
+    <div class="badge"><strong>{{ stats.total }}</strong> {{ "person has" if stats.total == 1 else "people have" }} voted</div>
+    {% endif %}
+  </header>
+
+  {% if already_voted %}
+  <div class="voted-banner">
+    ✓ You have already voted. <a href="/results">See your results →</a>
+  </div>
+  {% else %}
+
+  {% if error %}
+  <div class="error-box">⚠ {{ error }}</div>
+  {% endif %}
+
+  <form method="POST" action="/vote" id="ballot">
+    <input type="hidden" name="load_time" value="{{ load_time }}"/>
+
+    {% set ns = namespace(current_section=None) %}
+    {% for q in questions %}
+
+      {# Section header #}
+      {% if q.section != ns.current_section %}
+        {% if ns.current_section != None %}</div>{% endif %}
+        {% set ns.current_section = q.section %}
+        <div class="section-block">
+        <div class="section-header">
+          <span>{{ q.icon }}</span>
+          <span>{{ q.section_label }}</span>
+        </div>
+      {% endif %}
+
+      <div class="question-card" id="q-{{ q.id }}">
+        <div class="question-meta">Question {{ q.number }} / {{ questions|length }}</div>
+        <div class="question-text">{{ q.text }}</div>
+
+        {% if q.context %}
+        <details class="context-block">
+          <summary>Context & background</summary>
+          <p>{{ q.context }}</p>
+          {% if q.references %}
+          <ul class="ref-list">
+            {% for ref in q.references %}
+            <li><a href="{{ ref.url }}" target="_blank" rel="noopener">{{ ref.label }}</a></li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+          {% if q.dimension != 'calibration' %}
+          <div class="live-refs-wrap" id="wrap-{{ q.id }}">
+            <button type="button" class="btn-live-refs" onclick="loadLiveRefs('{{ q.id }}', this)">
+              ⚡ Load live Légifrance references
+            </button>
+            <div class="live-refs-panel" id="live-{{ q.id }}" hidden></div>
+          </div>
+          {% endif %}
+        </details>
+        {% endif %}
+
+        <div class="options {% if q.dimension == 'calibration' %}options-candidates{% endif %}">
+          {% if q.dimension == 'calibration' %}
+            {# Group candidates by political family with visual dividers #}
+            {% set ns2 = namespace(current_group=None) %}
+            {% for opt in q.options %}
+              {% if opt.group != ns2.current_group %}
+                {% set ns2.current_group = opt.group %}
+                <div class="candidate-group-label">{{ opt.group }}</div>
+              {% endif %}
+              <label class="option-label option-candidate">
+                <input type="radio" name="{{ q.id }}" value="{{ opt.value }}" required/>
+                <span class="option-text">
+                  <strong>{{ opt.label }}</strong>
+                  {% if opt.note %}
+                  <span class="candidate-note">{{ opt.note }}</span>
+                  {% endif %}
+                  {% if opt.refs %}
+                  <span class="candidate-refs">
+                    {% for ref in opt.refs %}
+                    <a href="{{ ref.url }}" target="_blank" rel="noopener">{{ ref.label }}</a>{% if not loop.last %} · {% endif %}
+                    {% endfor %}
+                  </span>
+                  {% endif %}
+                </span>
+              </label>
+            {% endfor %}
+          {% else %}
+            {% for opt in q.options %}
+            <label class="option-label">
+              <input type="radio" name="{{ q.id }}" value="{{ opt.value }}" required/>
+              <span class="option-text">{{ opt.label }}</span>
+            </label>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+
+    {% endfor %}
+    </div>{# close last section #}
+
+    <div class="submit-section">
+      <button type="submit" class="btn-vote">Submit my answers →</button>
+      <p class="submit-note">
+        One vote per device. Your consistency is automatically evaluated.<br>
+        Results are shown immediately after voting.
+      </p>
+    </div>
+  </form>
+
+  {% endif %}
+
+</div>
+
+<script>
+async function loadLiveRefs(qid, btn) {
+  btn.disabled = true;
+  btn.textContent = 'Loading…';
+  const panel = document.getElementById('live-' + qid);
+  try {
+    const res = await fetch('/api/references/' + qid);
+    const data = await res.json();
+    panel.removeAttribute('hidden');
+
+    if (!data.configured) {
+      panel.innerHTML = '<p class="live-refs-note">Légifrance API not configured — add PISTE credentials to .env to enable live references.</p>';
+      btn.style.display = 'none';
+      return;
+    }
+    if (data.error === 'auth_failed') {
+      panel.innerHTML = '<p class="live-refs-note live-refs-error">Authentication failed — check your PISTE_CLIENT_ID / PISTE_CLIENT_SECRET.</p>';
+      btn.style.display = 'none';
+      return;
+    }
+    if (!data.refs || data.refs.length === 0) {
+      panel.innerHTML = '<p class="live-refs-note">No results found for this topic.</p>';
+      btn.style.display = 'none';
+      return;
+    }
+
+    const heading = data.heading ? `<div class="live-refs-heading">${data.heading}${data.cached ? ' <span class="live-refs-cached">(cached)</span>' : ''}</div>` : '';
+    const links = data.refs.map(r =>
+      `<a href="${r.url}" target="_blank" rel="noopener" class="live-ref-link">
+        <span class="live-ref-label">${r.label}</span>
+        ${r.date ? `<span class="live-ref-date">${r.date}</span>` : ''}
+      </a>`
+    ).join('');
+    panel.innerHTML = heading + '<div class="live-refs-list">' + links + '</div>';
+    btn.style.display = 'none';
+  } catch (e) {
+    panel.removeAttribute('hidden');
+    panel.innerHTML = '<p class="live-refs-note live-refs-error">Request failed.</p>';
+    btn.disabled = false;
+    btn.textContent = '⚡ Load live Légifrance references';
+  }
+}
+</script>
+
+</body>
+</html>

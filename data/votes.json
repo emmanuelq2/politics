@@ -1,0 +1,23 @@
+{
+  "total_voters": 0,
+  "responses": [],
+  "dim_totals": {
+    "eco": [],
+    "econ": [],
+    "ukraine": [],
+    "police": []
+  },
+  "question_counts": {
+    "eco_activism": {},
+    "eco_economy": {},
+    "wealth_tax": {},
+    "intersectionality": {},
+    "ukraine_support": {},
+    "ukraine_origins": {},
+    "systemic_racism": {},
+    "lbd_armament": {},
+    "state_role": {},
+    "political_alignment": {}
+  },
+  "credibility_scores": []
+}

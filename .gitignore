@@ -1,0 +1,5 @@
+.env
+__pycache__/
+*.pyc
+data/voter_ids.json
+data/legifrance_cache.json

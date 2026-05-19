@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>French Political Pulse — 4 Key Issues</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="flag">🇫🇷</div>
+    <h1>French Political Pulse</h1>
+    <p>Where do you stand on the 4 defining issues shaping France today?</p>
+    <div class="badge">
+      <strong>{{ total_voters }}</strong> {{ "person has" if total_voters == 1 else "people have" }} voted so far
+    </div>
+  </header>
+
+  {% if already_voted %}
+
+    <div class="voted-banner">
+      ✓ Your vote has been recorded — here are the live results.
+    </div>
+
+    <div class="results-nav">
+      <a href="/">← Back to ballot</a>
+    </div>
+
+    {% for issue in issues %}
+    <div class="issue-card">
+      <div class="issue-header">
+        <span class="issue-icon">{{ issue.icon }}</span>
+        <div>
+          <div class="issue-number">Issue {{ loop.index }} of {{ issues|length }}</div>
+          <div class="issue-title">{{ issue.title }}</div>
+        </div>
+      </div>
+
+      {% set issue_results = results[issue.id] %}
+      {% set issue_pcts = percentages[issue.id] %}
+      {% set total_for_issue = issue_results.values()|sum %}
+      {% set max_count = issue_results.values()|max if issue_results else 0 %}
+
+      <div class="results-block">
+        {% for option in issue.options %}
+          {% set count = issue_results.get(option.value, 0) %}
+          {% set pct = issue_pcts.get(option.value, 0) %}
+          {% set is_top = count == max_count and count > 0 %}
+          <div class="result-row">
+            <div class="result-meta">
+              <span class="result-label">{{ option.label }}</span>
+              <span class="result-pct">{{ pct }}%</span>
+            </div>
+            <div class="bar-track">
+              <div class="bar-fill {% if is_top %}top{% endif %}" style="width: {{ pct }}%"></div>
+            </div>
+            <span class="result-count">{{ count }} vote{{ "s" if count != 1 else "" }}</span>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+
+    <div class="submit-section">
+      <form method="POST" action="/reset" onsubmit="return confirm('Reset ALL votes? This cannot be undone.')">
+        <button type="submit" class="btn-reset">Reset all votes</button>
+      </form>
+    </div>
+
+  {% else %}
+
+    {% if error is defined %}
+    <div class="error-box">⚠ {{ error }}</div>
+    {% endif %}
+
+    <form method="POST" action="/vote" id="ballot">
+      {% for issue in issues %}
+      <div class="issue-card">
+        <div class="issue-header">
+          <span class="issue-icon">{{ issue.icon }}</span>
+          <div>
+            <div class="issue-number">Issue {{ loop.index }} of {{ issues|length }}</div>
+            <div class="issue-title">{{ issue.title }}</div>
+          </div>
+        </div>
+
+        <div class="options">
+          {% for option in issue.options %}
+          <label class="option-label">
+            <input type="radio" name="{{ issue.id }}" value="{{ option.value }}" required />
+            <span class="option-text">{{ option.label }}</span>
+          </label>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+
+      <div class="submit-section">
+        <button type="submit" class="btn-vote">Submit my vote →</button>
+        <p style="margin-top: 1rem; color: var(--muted); font-size: 0.82rem;">
+          One vote per person. Results revealed after voting.
+        </p>
+      </div>
+    </form>
+
+  {% endif %}
+
+</div>
+</body>
+</html>

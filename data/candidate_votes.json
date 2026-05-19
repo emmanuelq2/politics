@@ -1,0 +1,813 @@
+{
+  "built_at": "2026-05-16T16:10:12.759731+00:00",
+  "scrutins_used": {
+    "ukraine_support": [
+      {
+        "id": 3461,
+        "leg": 16,
+        "label": "Accord de sécurité franco-ukrainien (mars 2024)"
+      },
+      {
+        "id": 652,
+        "leg": 16,
+        "label": "Résolution soutien Ukraine, condamnation agression russe (nov. 2022)"
+      }
+    ],
+    "intersectionality": [
+      {
+        "id": 3289,
+        "leg": 16,
+        "label": "Constitutionnalisation du droit à l'IVG (jan. 2024)"
+      }
+    ],
+    "state_role": [
+      {
+        "id": 1240,
+        "leg": 16,
+        "label": "Motion de censure transpartisane (réforme retraites, mar. 2023)"
+      },
+      {
+        "id": 1241,
+        "leg": 16,
+        "label": "Motion de censure LFI/gauche (réforme retraites, mar. 2023)"
+      }
+    ],
+    "systemic_racism": [
+      {
+        "id": 3213,
+        "leg": 16,
+        "label": "Loi immigration — vote sur l'ensemble du texte (déc. 2023)"
+      }
+    ],
+    "eco_economy": [
+      {
+        "id": 1243,
+        "leg": 16,
+        "label": "Loi d'accélération du nucléaire (mar. 2023)"
+      }
+    ]
+  },
+  "candidates": {
+    "arthaud": {
+      "is_deputy": false,
+      "reason": "Never elected to AN (LO candidate)",
+      "votes": {}
+    },
+    "poutou": {
+      "is_deputy": false,
+      "reason": "Never elected to AN (NPA candidate)",
+      "votes": {}
+    },
+    "melenchon": {
+      "is_deputy": false,
+      "reason": "Lost 2022 and 2024 elections — no mandate in 16th or 17th legislature",
+      "votes": {}
+    },
+    "autain": {
+      "is_deputy": true,
+      "pa": "PA588884",
+      "legislature": 16,
+      "votes": {
+        "ukraine_support": {
+          "scrutins": [
+            {
+              "id": 3461,
+              "label": "Accord de sécurité franco-ukrainien (mars 2024)",
+              "position": "contre",
+              "pour_is_high": true,
+              "weight": 1.5
+            },
+            {
+              "id": 652,
+              "label": "Résolution soutien Ukraine, condamnation agression russe (nov. 2022)",
+              "position": "abstention",
+              "pour_is_high": true,
+              "weight": 1.0
+            }
+          ],
+          "summary": "anti"
+        },
+        "intersectionality": {
+          "scrutins": [
+            {
+              "id": 3289,
+              "label": "Constitutionnalisation du droit à l'IVG (jan. 2024)",
+              "position": "pour",
+              "pour_is_high": true,
+              "weight": 1.0
+            }
+          ],
+          "summary": "pro"
+        },
+        "state_role": {
+          "scrutins": [
+            {
+              "id": 1240,
+              "label": "Motion de censure transpartisane (réforme retraites, mar. 2023)",
+              "position": "pour",
+              "pour_is_high": true,
+              "weight": 1.5
+            },
+            {
+              "id": 1241,
+              "label": "Motion de censure LFI/gauche (réforme retraites, mar. 2023)",
+              "position": "absent",
+              "pour_is_high": true,
+              "weight": 1.0
+            }
+          ],
+          "summary": "pro"
+        },
+        "systemic_racism": {
+          "scrutins": [
+            {
+              "id": 3213,
+              "label": "Loi immigration — vote sur l'ensemble du texte (déc. 2023)",
+              "position": "contre",
+              "pour_is_high": false,
+              "weight": 1.0
+            }
+          ],
+          "summary": "pro"
+        },
+        "eco_economy": {
+          "scrutins": [
+            {
+              "id": 1243,
+              "label": "Loi d'accélération du nucléaire (mar. 2023)",
+              "position": "absent",
+              "pour_is_high": false,
+              "weight": 1.0
+            }
+          ],
+          "summary": "mixed"
+        }
+      }
+    },
+    "ruffin": {
+      "is_deputy": true,
+      "pa": "PA722142",
+      "legislature": 16,
+      "votes": {
+        "ukraine_support": {
+          "scrutins": [
+            {
+              "id": 3461,
+              "label": "Accord de sécurité franco-ukrainien (mars 2024)",
+              "position": "contre",
+              "pour_is_high": true,
+              "weight": 1.5
+            },
+            {
+              "id": 652,
+              "label": "Résolution soutien Ukraine, condamnation agression russe (nov. 2022)",
+              "position": "absent",
+              "pour_is_high": true,
+              "weight": 1.0
+            }
+          ],
+          "summary": "anti"
+        },
+        "intersectionality": {
+          "scrutins": [
+            {
+              "id": 3289,
+              "label": "Constitutionnalisation du droit à l'IVG (jan. 2024)",
+              "position": "pour",
+              "pour_is_high": true,
+              "weight": 1.0
+            }
+          ],
+          "summary": "pro"
+        },
+        "state_role": {
+          "scrutins": [
+            {
+              "id": 1240,
+              "label": "Motion de censure transpartisane (réforme retraites, mar. 2023)",
+              "position": "pour",
+              "pour_is_high": true,
+              "weight": 1.5
+            },
+            {
+              "id": 1241,
+              "label": "Motion de censure LFI/gauche (réforme retraites, mar. 2023)",
+              "position": "absent",
+              "pour_is_high": true,
+              "weight": 1.0
+            }
+          ],
+          "summary": "pro"
+        },
+        "systemic_racism": {
+          "scrutins": [
+            {
+              "id": 3213,
+              "label": "Loi immigration — vote sur l'ensemble du texte (déc. 2023)",
+              "position": "contre",
+              "pour_is_high": false,
+              "weight": 1.0
+            }
+          ],
+          "summary": "pro"
+        },
+        "eco_economy": {
+          "scrutins": [
+            {
+              "id": 1243,
+              "label": "Loi d'accélération du nucléaire (mar. 2023)",
+              "position": "contre",
+              "pour_is_high": false,
+              "weight": 1.0
+            }
+          ],
+          "summary": "pro"
+        }
+      }
+    },
+    "roussel": {
+      "is_deputy": true,
+      "pa": "PA720692",
+      "legislature": 16,
+      "votes": {
+        "ukraine_support": {
+          "scrutins": [
+            {
+              "id": 3461,
+              "label": "Accord de sécurité franco-ukrainien (mars 2024)",
+              "position": "contre",
+              "pour_is_high": true,
+              "weight": 1.5
+            },
+            {
+              "id": 652,
+              "label": "Résolution soutien Ukraine, condamnation agression russe (nov. 2022)",
+              "position": "pour",
+              "pour_is_high": true,
+              "weight": 1.0
+            }
+          ],
+          "summary": "anti"
+        },
+        "intersectionality": {
+          "scrutins": [
+            {
+              "id": 3289,
+              "label": "Constitutionnalisation du droit à l'IVG (jan. 2024)",
+              "position": "pour",
+              "pour_is_high": true,
+              "weight": 1.0
+            }
+          ],
+          "summary": "pro"
+        },
+        "state_role": {
+          "scrutins": [
+            {
+              "id": 1240,
+              "label": "Motion de censure transpartisane (réforme retraites, mar. 2023)",
+              "position": "pour",
+              "pour_is_high": true,
+              "weight": 1.5
+            },
+            {
+              "id": 1241,
+              "label": "Motion de censure LFI/gauche (réforme retraites, mar. 2023)",
+              "position": "absent",
+              "pour_is_high": true,
+              "weight": 1.0
+            }
+          ],
+          "summary": "pro"
+        },
+        "systemic_racism": {
+          "scrutins": [
+            {
+              "id": 3213,
+              "label": "Loi immigration — vote sur l'ensemble du texte (déc. 2023)",
+              "position": "contre",
+              "pour_is_high": false,
+              "weight": 1.0
+            }
+          ],
+          "summary": "pro"
+        },
+        "eco_economy": {
+          "scrutins": [
+            {
+              "id": 1243,
+              "label": "Loi d'accélération du nucléaire (mar. 2023)",
+              "position": "pour",
+              "pour_is_high": false,
+              "weight": 1.0
+            }
+          ],
+          "summary": "anti"
+        }
+      }
+    },
+    "brossat": {
+      "is_deputy": false,
+      "reason": "Senator (Paris) — not AN deputy",
+      "votes": {}
+    },
+    "guedj": {
+      "is_deputy": true,
+      "pa": "PA1567",
+      "legislature": 17,
+      "votes": {}
+    },
+    "faure_vallaud": {
+      "is_deputy": true,
+      "pa": "PA609332",
+      "legislature": 16,
+      "votes": {
+        "ukraine_support": {
+          "scrutins": [
+            {
+              "id": 3461,
+              "label": "Accord de sécurité franco-ukrainien (mars 2024)",
+              "position": "pour",
+              "pour_is_high": true,
+              "weight": 1.5
+            },
+            {
+              "id": 652,
+              "label": "Résolution soutien Ukraine, condamnation agression russe (nov. 2022)",
+              "position": "pour",
+              "pour_is_high": true,
+              "weight": 1.0
+            }
+          ],
+          "summary": "pro"
+        },
+        "intersectionality": {
+          "scrutins": [
+            {
+              "id": 3289,
+              "label": "Constitutionnalisation du droit à l'IVG (jan. 2024)",
+              "position": "pour",
+              "pour_is_high": true,
+              "weight": 1.0
+            }
+          ],
+          "summary": "pro"
+        },
+        "state_role": {
+          "scrutins": [
+            {
+              "id": 1240,
+              "label": "Motion de censure transpartisane (réforme retraites, mar. 2023)",
+              "position": "pour",
+              "pour_is_high": true,
+              "weight": 1.5
+            },
+            {
+              "id": 1241,
+              "label": "Motion de censure LFI/gauche (réforme retraites, mar. 2023)",
+              "position": "absent",
+              "pour_is_high": true,
+              "weight": 1.0
+            }
+          ],
+          "summary": "pro"
+        },
+        "systemic_racism": {
+          "scrutins": [
+            {
+              "id": 3213,
+              "label": "Loi immigration — vote sur l'ensemble du texte (déc. 2023)",
+              "position": "contre",
+              "pour_is_high": false,
+              "weight": 1.0
+            }
+          ],
+          "summary": "pro"
+        },
+        "eco_economy": {
+          "scrutins": [
+            {
+              "id": 1243,
+              "label": "Loi d'accélération du nucléaire (mar. 2023)",
+              "position": "contre",
+              "pour_is_high": false,
+              "weight": 1.0
+            }
+          ],
+          "summary": "pro"
+        }
+      }
+    },
+    "hollande": {
+      "is_deputy": true,
+      "pa": "PA1654",
+      "legislature": 17,
+      "votes": {}
+    },
+    "tondelier": {
+      "is_deputy": false,
+      "reason": "Party leader (Les Écologistes) — never AN deputy",
+      "votes": {}
+    },
+    "batho": {
+      "is_deputy": true,
+      "pa": "PA335999",
+      "legislature": 16,
+      "votes": {
+        "ukraine_support": {
+          "scrutins": [
+            {
+              "id": 3461,
+              "label": "Accord de sécurité franco-ukrainien (mars 2024)",
+              "position": "pour",
+              "pour_is_high": true,
+              "weight": 1.5
+            },
+            {
+              "id": 652,
+              "label": "Résolution soutien Ukraine, condamnation agression russe (nov. 2022)",
+              "position": "absent",
+              "pour_is_high": true,
+              "weight": 1.0
+            }
+          ],
+          "summary": "pro"
+        },
+        "intersectionality": {
+          "scrutins": [
+            {
+              "id": 3289,
+              "label": "Constitutionnalisation du droit à l'IVG (jan. 2024)",
+              "position": "pour",
+              "pour_is_high": true,
+              "weight": 1.0
+            }
+          ],
+          "summary": "pro"
+        },
+        "state_role": {
+          "scrutins": [
+            {
+              "id": 1240,
+              "label": "Motion de censure transpartisane (réforme retraites, mar. 2023)",
+              "position": "pour",
+              "pour_is_high": true,
+              "weight": 1.5
+            },
+            {
+              "id": 1241,
+              "label": "Motion de censure LFI/gauche (réforme retraites, mar. 2023)",
+              "position": "absent",
+              "pour_is_high": true,
+              "weight": 1.0
+            }
+          ],
+          "summary": "pro"
+        },
+        "systemic_racism": {
+          "scrutins": [
+            {
+              "id": 3213,
+              "label": "Loi immigration — vote sur l'ensemble du texte (déc. 2023)",
+              "position": "contre",
+              "pour_is_high": false,
+              "weight": 1.0
+            }
+          ],
+          "summary": "pro"
+        },
+        "eco_economy": {
+          "scrutins": [
+            {
+              "id": 1243,
+              "label": "Loi d'accélération du nucléaire (mar. 2023)",
+              "position": "contre",
+              "pour_is_high": false,
+              "weight": 1.0
+            }
+          ],
+          "summary": "pro"
+        }
+      }
+    },
+    "s_rousseau": {
+      "is_deputy": true,
+      "pa": "PA795076",
+      "legislature": 16,
+      "votes": {
+        "ukraine_support": {
+          "scrutins": [
+            {
+              "id": 3461,
+              "label": "Accord de sécurité franco-ukrainien (mars 2024)",
+              "position": "pour",
+              "pour_is_high": true,
+              "weight": 1.5
+            },
+            {
+              "id": 652,
+              "label": "Résolution soutien Ukraine, condamnation agression russe (nov. 2022)",
+              "position": "absent",
+              "pour_is_high": true,
+              "weight": 1.0
+            }
+          ],
+          "summary": "pro"
+        },
+        "intersectionality": {
+          "scrutins": [
+            {
+              "id": 3289,
+              "label": "Constitutionnalisation du droit à l'IVG (jan. 2024)",
+              "position": "pour",
+              "pour_is_high": true,
+              "weight": 1.0
+            }
+          ],
+          "summary": "pro"
+        },
+        "state_role": {
+          "scrutins": [
+            {
+              "id": 1240,
+              "label": "Motion de censure transpartisane (réforme retraites, mar. 2023)",
+              "position": "pour",
+              "pour_is_high": true,
+              "weight": 1.5
+            },
+            {
+              "id": 1241,
+              "label": "Motion de censure LFI/gauche (réforme retraites, mar. 2023)",
+              "position": "absent",
+              "pour_is_high": true,
+              "weight": 1.0
+            }
+          ],
+          "summary": "pro"
+        },
+        "systemic_racism": {
+          "scrutins": [
+            {
+              "id": 3213,
+              "label": "Loi immigration — vote sur l'ensemble du texte (déc. 2023)",
+              "position": "contre",
+              "pour_is_high": false,
+              "weight": 1.0
+            }
+          ],
+          "summary": "pro"
+        },
+        "eco_economy": {
+          "scrutins": [
+            {
+              "id": 1243,
+              "label": "Loi d'accélération du nucléaire (mar. 2023)",
+              "position": "contre",
+              "pour_is_high": false,
+              "weight": 1.0
+            }
+          ],
+          "summary": "pro"
+        }
+      }
+    },
+    "glucksmann": {
+      "is_deputy": false,
+      "reason": "MEP (European Parliament) — not AN deputy",
+      "votes": {}
+    },
+    "cazeneuve": {
+      "is_deputy": false,
+      "reason": "Former PM; no AN mandate since ~2014",
+      "votes": {}
+    },
+    "bayrou": {
+      "is_deputy": false,
+      "reason": "Former AN deputy until 2017; now Prime Minister",
+      "votes": {}
+    },
+    "e_philippe": {
+      "is_deputy": false,
+      "reason": "Mayor of Le Havre; lost 2024 snap election",
+      "votes": {}
+    },
+    "attal": {
+      "is_deputy": true,
+      "pa": "PA722190",
+      "legislature": 17,
+      "votes": {}
+    },
+    "darmanin": {
+      "is_deputy": false,
+      "reason": "Lost Tourcoing seat in 2024 snap elections",
+      "votes": {}
+    },
+    "de_villepin": {
+      "is_deputy": false,
+      "reason": "Former PM/Senator — never AN deputy",
+      "votes": {}
+    },
+    "retailleau": {
+      "is_deputy": false,
+      "reason": "Senator (Vendée) — not AN deputy",
+      "votes": {}
+    },
+    "bertrand": {
+      "is_deputy": false,
+      "reason": "Regional president — not current AN deputy",
+      "votes": {}
+    },
+    "lisnard": {
+      "is_deputy": false,
+      "reason": "Mayor (Cannes) — never AN deputy",
+      "votes": {}
+    },
+    "wauquiez": {
+      "is_deputy": true,
+      "pa": "PA267285",
+      "legislature": 16,
+      "votes": {
+        "ukraine_support": {
+          "scrutins": [
+            {
+              "id": 3461,
+              "label": "Accord de sécurité franco-ukrainien (mars 2024)",
+              "position": "absent",
+              "pour_is_high": true,
+              "weight": 1.5
+            },
+            {
+              "id": 652,
+              "label": "Résolution soutien Ukraine, condamnation agression russe (nov. 2022)",
+              "position": "absent",
+              "pour_is_high": true,
+              "weight": 1.0
+            }
+          ],
+          "summary": "mixed"
+        },
+        "intersectionality": {
+          "scrutins": [
+            {
+              "id": 3289,
+              "label": "Constitutionnalisation du droit à l'IVG (jan. 2024)",
+              "position": "absent",
+              "pour_is_high": true,
+              "weight": 1.0
+            }
+          ],
+          "summary": "mixed"
+        },
+        "state_role": {
+          "scrutins": [
+            {
+              "id": 1240,
+              "label": "Motion de censure transpartisane (réforme retraites, mar. 2023)",
+              "position": "absent",
+              "pour_is_high": true,
+              "weight": 1.5
+            },
+            {
+              "id": 1241,
+              "label": "Motion de censure LFI/gauche (réforme retraites, mar. 2023)",
+              "position": "absent",
+              "pour_is_high": true,
+              "weight": 1.0
+            }
+          ],
+          "summary": "mixed"
+        },
+        "systemic_racism": {
+          "scrutins": [
+            {
+              "id": 3213,
+              "label": "Loi immigration — vote sur l'ensemble du texte (déc. 2023)",
+              "position": "absent",
+              "pour_is_high": false,
+              "weight": 1.0
+            }
+          ],
+          "summary": "mixed"
+        },
+        "eco_economy": {
+          "scrutins": [
+            {
+              "id": 1243,
+              "label": "Loi d'accélération du nucléaire (mar. 2023)",
+              "position": "absent",
+              "pour_is_high": false,
+              "weight": 1.0
+            }
+          ],
+          "summary": "mixed"
+        }
+      }
+    },
+    "dupont_aignan": {
+      "is_deputy": false,
+      "reason": "Lost seat in 2024 snap elections",
+      "votes": {}
+    },
+    "le_pen": {
+      "is_deputy": true,
+      "pa": "PA720614",
+      "legislature": 16,
+      "votes": {
+        "ukraine_support": {
+          "scrutins": [
+            {
+              "id": 3461,
+              "label": "Accord de sécurité franco-ukrainien (mars 2024)",
+              "position": "abstention",
+              "pour_is_high": true,
+              "weight": 1.5
+            },
+            {
+              "id": 652,
+              "label": "Résolution soutien Ukraine, condamnation agression russe (nov. 2022)",
+              "position": "abstention",
+              "pour_is_high": true,
+              "weight": 1.0
+            }
+          ],
+          "summary": "mixed"
+        },
+        "intersectionality": {
+          "scrutins": [
+            {
+              "id": 3289,
+              "label": "Constitutionnalisation du droit à l'IVG (jan. 2024)",
+              "position": "pour",
+              "pour_is_high": true,
+              "weight": 1.0
+            }
+          ],
+          "summary": "pro"
+        },
+        "state_role": {
+          "scrutins": [
+            {
+              "id": 1240,
+              "label": "Motion de censure transpartisane (réforme retraites, mar. 2023)",
+              "position": "pour",
+              "pour_is_high": true,
+              "weight": 1.5
+            },
+            {
+              "id": 1241,
+              "label": "Motion de censure LFI/gauche (réforme retraites, mar. 2023)",
+              "position": "pour",
+              "pour_is_high": true,
+              "weight": 1.0
+            }
+          ],
+          "summary": "pro"
+        },
+        "systemic_racism": {
+          "scrutins": [
+            {
+              "id": 3213,
+              "label": "Loi immigration — vote sur l'ensemble du texte (déc. 2023)",
+              "position": "pour",
+              "pour_is_high": false,
+              "weight": 1.0
+            }
+          ],
+          "summary": "anti"
+        },
+        "eco_economy": {
+          "scrutins": [
+            {
+              "id": 1243,
+              "label": "Loi d'accélération du nucléaire (mar. 2023)",
+              "position": "absent",
+              "pour_is_high": false,
+              "weight": 1.0
+            }
+          ],
+          "summary": "mixed"
+        }
+      }
+    },
+    "bellamy": {
+      "is_deputy": false,
+      "reason": "MEP (European Parliament) — François-Xavier Bellamy, not AN deputy",
+      "votes": {}
+    },
+    "zemmour": {
+      "is_deputy": false,
+      "reason": "Never elected to any legislative body",
+      "votes": {}
+    },
+    "philippot": {
+      "is_deputy": false,
+      "reason": "Last AN mandate in 14th legislature (2012–17)",
+      "votes": {}
+    },
+    "asselineau": {
+      "is_deputy": false,
+      "reason": "Never elected to AN",
+      "votes": {}
+    }
+  }
+}
